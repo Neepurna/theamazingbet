@@ -2,7 +2,7 @@
 
 > Lock your bet and compete with your friends in this decentralized betting platform.
 
-![GitHub](https://img.shields.io/github/license/yourusername/amazing-bet)
+![GitHub](https://img.shields.io/github/license/neepurna/theamazingbet)
 ![Ethereum](https://img.shields.io/badge/Ethereum-Powered-blue)
 ![Hardhat](https://img.shields.io/badge/Built%20with-Hardhat-yellow)
 
