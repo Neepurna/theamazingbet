@@ -6,7 +6,7 @@
 ![Ethereum](https://img.shields.io/badge/Ethereum-Powered-blue)
 ![Hardhat](https://img.shields.io/badge/Built%20with-Hardhat-yellow)
 
-A decentralized betting platform built on Ethereum where users can create and participate in bets with their friends using smart contracts. This project demonstrates the power of blockchain technology in creating transparent and trustless betting systems.
+A decentralized betting platform built on Ethereum where users can transfer there token to other crypto address 
 
 ## 🎯 Features
 
