@@ -88,71 +88,51 @@ export class Dapp extends React.Component {
 
     // If everything is loaded, we render the application.
     return (
-      <div className="container p-4">
+      <div className="container-fluid d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
         <div className="row">
-          <div className="col-12">
-            <h1>
-              {this.state.tokenData.name} ({this.state.tokenData.symbol})
-            </h1>
-            <p>
-              Welcome <b>{this.state.selectedAddress}</b>, you have{" "}
-              <b>
-                {this.state.balance.toString()} {this.state.tokenData.symbol}
-              </b>
-              .
-            </p>
-          </div>
-        </div>
+          <div className="col-md-12">
+            <div className="position-relative" style={{ maxWidth: "500px", margin: "0 auto" }}>
+              <div className="card shadow-lg border-0 rounded-3 bg-dark text-light">
+                <div className="card-header bg-warning text-dark p-3">
+                  <h4 className="card-title mb-0 d-flex align-items-center">
+                    <i className="bi bi-coin me-2"></i>
+                    {this.state.tokenData.name} ({this.state.tokenData.symbol})
+                  </h4>
+                </div>
+                
+                <div className="card-body p-4">
+                  <div className="alert alert-warning mb-4">
+                    <i className="bi bi-person-badge me-2"></i>
+                    Welcome <b>{this.state.selectedAddress}</b>
+                    <hr className="my-2" />
+                    <i className="bi bi-wallet2 me-2"></i>
+                    Balance: <b>{this.state.balance.toString()} {this.state.tokenData.symbol}</b>
+                  </div>
 
-        <hr />
+                  {this.state.txBeingSent && (
+                    <WaitingForTransactionMessage txHash={this.state.txBeingSent} />
+                  )}
 
-        <div className="row">
-          <div className="col-12">
-            {/* 
-              Sending a transaction isn't an immediate action. You have to wait
-              for it to be mined.
-              If we are waiting for one, we show a message here.
-            */}
-            {this.state.txBeingSent && (
-              <WaitingForTransactionMessage txHash={this.state.txBeingSent} />
-            )}
+                  {this.state.transactionError && (
+                    <TransactionErrorMessage
+                      message={this._getRpcErrorMessage(this.state.transactionError)}
+                      dismiss={() => this._dismissTransactionError()}
+                    />
+                  )}
 
-            {/* 
-              Sending a transaction can fail in multiple ways. 
-              If that happened, we show a message here.
-            */}
-            {this.state.transactionError && (
-              <TransactionErrorMessage
-                message={this._getRpcErrorMessage(this.state.transactionError)}
-                dismiss={() => this._dismissTransactionError()}
-              />
-            )}
-          </div>
-        </div>
+                  {this.state.balance.eq(0) && (
+                    <NoTokensMessage selectedAddress={this.state.selectedAddress} />
+                  )}
 
-        <div className="row">
-          <div className="col-12">
-            {/*
-              If the user has no tokens, we don't show the Transfer form
-            */}
-            {this.state.balance.eq(0) && (
-              <NoTokensMessage selectedAddress={this.state.selectedAddress} />
-            )}
-
-            {/*
-              This component displays a form that the user can use to send a 
-              transaction and transfer some tokens.
-              The component doesn't have logic, it just calls the transferTokens
-              callback.
-            */}
-            {this.state.balance.gt(0) && (
-              <Transfer
-                transferTokens={(to, amount) =>
-                  this._transferTokens(to, amount)
-                }
-                tokenSymbol={this.state.tokenData.symbol}
-              />
-            )}
+                  {this.state.balance.gt(0) && (
+                    <Transfer
+                      transferTokens={(to, amount) => this._transferTokens(to, amount)}
+                      tokenSymbol={this.state.tokenData.symbol}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

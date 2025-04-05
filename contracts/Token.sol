@@ -7,11 +7,16 @@ pragma solidity ^0.8.9;
 // We import this library to be able to use console.log
 import "hardhat/console.sol";
 
-// This is the main building block for smart contracts.
+/**
+ * @title The Amazing Bet Game Token
+ * @dev Gaming token for The Amazing Bet platform
+ * @custom:ui-color #ffc107 
+ * @custom:ui-background #212529 
+ */
 contract Token {
-    // Some string type variables to identify the token.
-    string public name = "The Amazing Bet";
-    string public symbol = "TAB";
+    // Basic token details
+    string public name = "The Amazing Bet"; 
+    string public symbol = "TAB";                
 
     // The fixed amount of tokens stored in an unsigned integer type variable.
     uint256 public totalSupply = 1000000;
@@ -32,6 +37,7 @@ contract Token {
 
     /**
      * Contract initialization.
+     * @dev Sets up the token with matching UI theme from Transfer.js (dark background, gold highlights)
      */
     constructor() {
         // Store the chain ID during deployment
